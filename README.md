@@ -18,7 +18,7 @@ We used Eclipse 4.7.2, Java SE-9 and JUnit Jupiter 5.5.2. Following the document
 
 ## Screenshot of all tests passing
 
-Links in Repository
+https://github.com/tsarni21/PPA-Assignment1/blob/master/All%20Tests%20Passing.png
 
 ## Test Coverage Screenshot
 
