@@ -55,5 +55,14 @@ class emailTest {
 		// Assert
 		assertEquals(true, output);
 	}
+	@Test
+	void test_emailStartWithNum() {
+		// Arrange
+		JunitTesting test = new JunitTesting();
+		// ACT
+		boolean output = test.isValidEmail("1john.smith@gmail.com");
+		// Assert
+		assertEquals(false, output);
+	}
 
 }
