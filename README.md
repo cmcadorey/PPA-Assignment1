@@ -30,6 +30,8 @@ https://github.com/tsarni21/PPA-Assignment1/blob/master/Full%20Functionality%20S
 
 ## Red, Green, Refractor Screencast
 
+https://github.com/tsarni21/PPA-Assignment1/blob/master/Red%20Green%20Refactor%20Video.mp4
+
 ### Written Answers
 
 Describe your unit testing & TDD experience. What do you think of unit testing & TDD? Do you think
