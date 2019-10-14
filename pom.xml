@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>PPA1</groupId>
-  <artifactId>ppa2</artifactId>
-  <packaging>jar</packaging>
+  <artifactId>PPA1</artifactId>
+  <!-- <packaging>jar</packaging> -->
   <version>1.0-SNAPSHOT</version>
-  <name>ppa2</name>
+  <!-- <name>ppa2</name> -->
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -22,6 +22,7 @@
     </dependency>
   </dependencies>
   <build>
+    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <!-- Build an executable JAR -->
