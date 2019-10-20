@@ -52,7 +52,7 @@
 
 
   <build>
-    <!-- <sourceDirectory>src</sourceDirectory> -->
+    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
