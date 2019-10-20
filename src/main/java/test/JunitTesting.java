@@ -123,7 +123,7 @@ public class JunitTesting {
     }
 
     // DATABASE FUNCTIONS
-    public String computeBMI_database(int height_feet, double height_inches, double weight, Connection con) throws SQLException { 
+    public String BMIDB(int height_feet, double height_inches, double weight, Connection con) throws SQLException { 
         try{
             Statement s = con.createStatement();
 
