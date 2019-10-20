@@ -10,6 +10,7 @@ public class Run {
 		
 		Scanner input = new Scanner(System.in);
 		JunitTesting test = new JunitTesting();
+		String selection = null;
 
         //Menu
         int active = 1;
@@ -24,7 +25,13 @@ public class Run {
             System.out.println ("4) Email Address");
             System.out.println ("5) Exit");
 
-            String selection = input.next();
+            try {
+		selection = input.next();
+		}
+	    catch(Exception e) {
+		//exit upon input error
+		selection = "5";
+		}
 
                 if(selection.equals ("1")){
                     System.out.println ("Enter your height in feet");
