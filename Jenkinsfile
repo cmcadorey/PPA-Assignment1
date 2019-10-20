@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test -Dtest=bmiTest'
+                sh 'mvn test -Dtest="bmiTest,emailTest,retirementTest,distanceTest"'
             }
 
             post {
