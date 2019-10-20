@@ -19,10 +19,26 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
+
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
         }
-                stage('Deliver') {
+        stage('Integration Tests') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                sh 'mvn test -Dtest=TestDBFunctions'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh 'mvn exec:java'
             }
         }
      }
