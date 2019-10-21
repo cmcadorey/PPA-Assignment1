@@ -45,10 +45,10 @@ Connecting to the code using http requests
 You can use postman or a browser to make get and post requests to localhost:4789 when the program is running
 The following explains the possible routes and their parameters
 
-GET to https://urldefense.proofpoint.com/v2/url?u=http-3A__localhost-3A4789_retire&d=DwIGAg&c=sJ6xIWYx-zLMB3EPkvcnVg&r=luKm9xdYuv6JR7s8bEMK5S_AjQml5ZdXiZaBfBT2nOc&m=cEx1oMhY_iNBpwbVpwqcK_XE9FO3_s55hU8WY5vpFtA&s=IcJTjTlETTMbPFl-XDN7EkFihYPIRo2FnbhrxRLkXcw&e= 
+GET to localhost:4789/retire 
 -returns the inputs and outputs of the function
 
-POST to https://urldefense.proofpoint.com/v2/url?u=http-3A__localhost-3A4789_retire&d=DwIGAg&c=sJ6xIWYx-zLMB3EPkvcnVg&r=luKm9xdYuv6JR7s8bEMK5S_AjQml5ZdXiZaBfBT2nOc&m=cEx1oMhY_iNBpwbVpwqcK_XE9FO3_s55hU8WY5vpFtA&s=IcJTjTlETTMbPFl-XDN7EkFihYPIRo2FnbhrxRLkXcw&e= 
+POST to localhost:4789/retire
 -accesses the retire function with the following variables passed in
 Headers:
 	Variable	Data Type
@@ -57,10 +57,10 @@ Headers:
 	percentage	double
 	savings_goal	double
 
-GET to https://urldefense.proofpoint.com/v2/url?u=http-3A__localhost-3A4789_bmi&d=DwIGAg&c=sJ6xIWYx-zLMB3EPkvcnVg&r=luKm9xdYuv6JR7s8bEMK5S_AjQml5ZdXiZaBfBT2nOc&m=cEx1oMhY_iNBpwbVpwqcK_XE9FO3_s55hU8WY5vpFtA&s=JV95YiHv7KMDlKTnrtYnV1jbsnmQtoPgRAmOBYWJNp0&e= 
+GET to lcoalhost:4789/bmi
 -returns the inputs and outputs of the function
 
-POST to https://urldefense.proofpoint.com/v2/url?u=http-3A__localhost-3A4789_bmi&d=DwIGAg&c=sJ6xIWYx-zLMB3EPkvcnVg&r=luKm9xdYuv6JR7s8bEMK5S_AjQml5ZdXiZaBfBT2nOc&m=cEx1oMhY_iNBpwbVpwqcK_XE9FO3_s55hU8WY5vpFtA&s=JV95YiHv7KMDlKTnrtYnV1jbsnmQtoPgRAmOBYWJNp0&e= 
+POST to localhost:4789/bmi
 -accesses the retire function with the following variables passed in
 Headers:
 	Variable	Data Type
