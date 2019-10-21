@@ -1,4 +1,4 @@
-package main.java.test;
+package test;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -26,7 +26,7 @@ public class PPA2_Server {
     public boolean start(Connection con) {
         try {
             connection=con;
-            server = HttpServer.create(new InetSocketAddress(5000), 0);
+            server = HttpServer.create(new InetSocketAddress(4789), 0);
             server.createContext("/", new MainHandler());
             server.start();
             return true;
@@ -52,7 +52,7 @@ public class PPA2_Server {
 
         public void handle (HttpExchange httpExchange) throws IOException{
                 String uri = httpExchange.getRequestURI().toString();
-                String method = httpExchange.getRequestMethod().toString();
+                String method = httpExchange.getRequestMethod();
                 String tmp = "Method: " + httpExchange.getRequestMethod() + "\n";
                 tmp = tmp + "Path: " + httpExchange.getRequestURI();
 
@@ -62,10 +62,10 @@ public class PPA2_Server {
                 else if(method.equals("GET") && (uri.equals("/retire"))){
                   getRetire(httpExchange);
                 }
-                else if(method.equals("POST") && (uri.contains("/bmi"))){
+                else if(method.equals("POST") && (uri.equals("/bmi"))){
                   postBmi(httpExchange);
                 }
-                else if(method.equals("POST") && (uri.contains("/retire"))){
+                else if(method.equals("POST") && (uri.equals("/retire"))){
                   postRetire(httpExchange);
                 }
                 else{
@@ -78,7 +78,7 @@ public class PPA2_Server {
                 ResultSet rSet=null;
                 try{
                   statement = connection.createStatement();
-                  rSet=statement.executeQuery("SELECT * FROM BMI");
+                  rSet=statement.executeQuery("SELECT * FROM bmi");
                 }
                 catch(SQLException e){
                   e.printStackTrace();
@@ -168,16 +168,16 @@ public class PPA2_Server {
               private void postBmi(HttpExchange h) throws IOException{
                 try{
                   Map <String, List<String>> map= h.getRequestHeaders();
-                  int feet=-1;
-                  double inches=-1.0;
-                  double weight=-1.0;
+                  int feet=1;
+                  double inches=1.0;
+                  double weight=1.0;
                     for (Map.Entry<String, List<String>> entry : map.entrySet()) {
                     String tmp = entry.getValue().toString();
                     tmp = tmp.substring(tmp.indexOf("[")+1,tmp.indexOf("]"));
-                    if(entry.getKey().equalsIgnoreCase("feet")){
+                    if(entry.getKey().equalsIgnoreCase("height_feet")){
                         feet= Integer.parseInt(tmp);
                     }
-                    if(entry.getKey().equalsIgnoreCase("inches")){
+                    if(entry.getKey().equalsIgnoreCase("height_inches")){
                       inches=Double.parseDouble(tmp);
                     }
                     if(entry.getKey().equalsIgnoreCase("weight")){
@@ -196,11 +196,9 @@ public class PPA2_Server {
                   else{
                     JunitTesting PPA1= new JunitTesting();
                     String ret = PPA1.BMIDB(feet, inches, weight,connection);
-
-                    String response=ret;
-                    h.sendResponseHeaders(200,response.getBytes().length);
+                    h.sendResponseHeaders(200,ret.getBytes().length);
                     OutputStream os= h.getResponseBody();
-                    os.write(response.getBytes());
+                    os.write(ret.getBytes());
                     os.close();
                   }       
                 }
@@ -238,7 +236,7 @@ public class PPA2_Server {
               }
       
               //formats the result set for the bmi or retire into JSON
-              private String formatIntoJSON(ResultSet rs){
+              public String formatIntoJSON(ResultSet rs){
                 try{
                   ResultSetMetaData meta = rs.getMetaData();
                   int cols = meta.getColumnCount();
@@ -261,13 +259,13 @@ public class PPA2_Server {
       
                     //build the json object for this row based on what table its from
                     json += "{";
-                    if(meta.getTableName(1).equals("BMI")){
+                    if(meta.getTableName(1).equals("bmi")){
                       json += "\"createdAt\":\"" + rs.getString("createdAt") + "\",";
-                      json += "\"height_feet\":" + rs.getInt("feet") + ",";
-                      json += "\"height_inches\":" + rs.getDouble("inches") + ",";
+                      json += "\"height_feet\":" + rs.getInt("height_feet") + ",";
+                      json += "\"height_inches\":" + rs.getDouble("height_inches") + ",";
                       json += "\"weight\":" + rs.getDouble("weight") + ",";
                       json += "\"BMI_Rounded\":" + rs.getDouble("BMI_Rounded") + ",";
-                      json += "\"result\":\"" + rs.getString("result") + "\"";
+                      //json += "\"result\":\"" + rs.getString("result") + "\"";
                     }
                     else{
                       json += "\"createdAt\":\"" + rs.getString("createdAt") + "\",";
@@ -276,7 +274,7 @@ public class PPA2_Server {
                       json += "\"percentage\":" + rs.getDouble("percentage") + ",";
                       json += "\"savings_goal\":" + rs.getDouble("savings_goal") + ",";
                       json += "\"retirement_age\":" + rs.getDouble("retirement_age") + ",";
-                      json += "\"result\":" + rs.getString("result");
+                      //json += "\"result\":" + rs.getString("result");
                       
                     }
                     json += "}";

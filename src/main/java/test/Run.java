@@ -29,8 +29,8 @@ public class Run {
 
         try{
             //change localhost to 192.168.99.100 if using Docker Toolbox
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost/PPA2DB", "admin", "password");
-			statement = connection.createStatement();
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost/mystuff", "postgres", "password");
+			s = conn.createStatement();
 			connected = true;
         }
         catch(SQLException e){
@@ -70,7 +70,7 @@ public class Run {
 					while (rs.next()) {
 						System.out.println("TimeStamp: " + rs.getString("createdAt") + ", Feet: " + rs.getInt("height_feet")
 						+ ", Inches: " + rs.getDouble("height_inches") + ", Weight: " + rs.getDouble("weight")
-						+ ", Bmi: " + rs.getDouble("BMI_Rounded") + ", Result: " + rs.getString("result"));
+						+ ", Bmi: " + rs.getDouble("BMI_Rounded"));
 					}
 				}
 				catch(SQLException e){
@@ -111,11 +111,11 @@ public class Run {
                 if(selection.equals ("2")){
                     System.out.println("These are the previous entries for this program:");
 				    try{
-					    rs = statement.executeQuery("SELECT * FROM Retire");
+					    rs = s.executeQuery("SELECT * FROM Retire");
 					while (rs.next()) {
 						System.out.println("TimeStamp: " + rs.getString("createdAt") + ", Age: " + rs.getDouble("age")
 						+ ", salary: " + rs.getDouble("salary") + ", Percentage: " + rs.getDouble("percentage")
-						+ ", Savings Goal: " + rs.getDouble("savings_goal") + ", Retirement Age: " + rs.getDouble("retirement_age") + ", Result: " + rs.getString("result"));
+						+ ", Savings Goal: " + rs.getDouble("savings_goal") + ", Retirement Age: " + rs.getDouble("retirement_age") );
 					}
 				}
 				catch(SQLException e){
@@ -188,8 +188,8 @@ public class Run {
                     		System.out.println("This is not a valid email");
                 }
                 if(selection.equals ("5")) {
-                    server.close();
-                    in.close();
+                    //server.close();
+                    input.close();
                 	System.exit(0);
                 }
         }

@@ -150,7 +150,7 @@ public class JunitTesting {
              result = "Your BMI is: " + BMI_Rounded + " You are obese";
              }
 
-             s.executeUpdate("Insert into BMI (height_feet,height_inches,weight,BMI_Rounded,result) values(" + height_feet + "," + height_inches + "," + weight + "," + BMI_Rounded + "," + result + ")");
+             s.executeUpdate("Insert into BMI (height_feet,height_inches,weight,BMI_Rounded) values(" + height_feet + "," + height_inches + "," + weight + "," + BMI_Rounded + ")");
 
             return result; 
         }
@@ -189,7 +189,7 @@ public class JunitTesting {
                 result = "Your age is over the death age.";
             }
 
-            s.executeUpdate("Insert into Retire (age,salary,percentage,savings_goal,retirement_age,result) values(" + age + "," + salary + "," + percentage + "," + savings_goal + "," + retirement_age + "," + result + ")"); 
+            s.executeUpdate("Insert into Retire (age,salary,percentage,savings_goal,retirement_age) values(" + age + "," + salary + "," + percentage + "," + savings_goal + "," + retirement_age + ")"); 
             return result;
         }
         catch(SQLException e){
