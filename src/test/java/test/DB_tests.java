@@ -63,7 +63,7 @@ public class DB_tests  {
     String answer = f.BMIDB(height_feet,height_inches,weight,c);
     assertEquals( answer,
         "Your BMI is: 25.6 You are overweight");
-    String shouldHaveHappened = "Insert into BMI (height_feet,height_inches,weight,BMI_Rounded,result) values(" + height_feet + "," + height_inches + "," + weight + "," + BMI_Rounded + ")";
+    String shouldHaveHappened = "Insert into BMI (height_feet,height_inches,weight,BMI_Rounded) values(" + height_feet + "," + height_inches + "," + weight + "," + BMI_Rounded + ")";
     verify(s).executeUpdate(shouldHaveHappened);
   }
   
@@ -94,7 +94,7 @@ public class DB_tests  {
     String answer = f.RetireDB(age, salary, percentage, savings_goal,c);
     assertEquals( answer,
     "You will retire at age: 79.0");
-    String shouldHaveHappened = "Insert into Retire (age,salary,percentage,savings_goal,retirement_age) values(" + age + "," + salary + "," + percentage + "," + savings_goal + ",'" + retirement_age + ")";
+    String shouldHaveHappened = "Insert into Retire (age,salary,percentage,savings_goal,retirement_age) values(" + age + "," + salary + "," + percentage + "," + savings_goal + "," + retirement_age + ")";
     verify(s).executeUpdate(shouldHaveHappened);
   }
   @Test
@@ -107,7 +107,7 @@ public class DB_tests  {
     String answer = f.RetireDB(age, salary, percentage, savings_goal,c);
     assertEquals( answer,
     "Your age is over the death age.");
-    String shouldHaveHappened = "Insert into Retire (age,salary,percentage,savings_goal,retirement_age) values(" + age + "," + salary + "," + percentage + "," + savings_goal + ",'" + retirement_age + ")";
+    String shouldHaveHappened = "Insert into Retire (age,salary,percentage,savings_goal,retirement_age) values(" + age + "," + salary + "," + percentage + "," + savings_goal + "," + retirement_age + ")";
     verify(s).executeUpdate(shouldHaveHappened);
   }
 
