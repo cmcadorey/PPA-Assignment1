@@ -1,4 +1,5 @@
 test/emailTest.class
 test/distanceTest.class
 test/retirementTest.class
+test/DB_tests.class
 test/bmiTest.class

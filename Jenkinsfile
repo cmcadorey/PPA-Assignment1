@@ -15,11 +15,20 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Test') {
+        stage('Unit Test') {
             steps {
                 sh 'mvn test -Dtest="bmiTest,emailTest,retirementTest,distanceTest"'
             }
-
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Integration Test'){
+            steps {
+                sh 'mvn test -Dtest=DB_tests'
+            }
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
