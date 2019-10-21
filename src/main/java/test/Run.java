@@ -3,24 +3,54 @@ package test;
 import java.util.*;
 import java.lang.Math;
 import java.lang.String;
+import java.sql.*;
 
 public class Run {
 
 	public static void main(String[] args) {
 		
 		Scanner input = new Scanner(System.in);
-		JunitTesting test = new JunitTesting();
+        JunitTesting test = new JunitTesting();
+        Connection conn = null;
+        Statement s = null;
+        ResultSet rs = null;
+        boolean connected = false;
 		String selection = null;
+
+        System.out.println("Welcome to this Program!");
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Could not find SQL connection driver.");
+        }
+
+        try{
+            //change localhost to 192.168.99.100 if using Docker Toolbox
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost/PPA2DB", "admin", "password");
+			statement = connection.createStatement();
+			connected = true;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("Could not connect to the database. Terminating program!");
+        }
+
+        PPA2_Server server = new PPA2_Server();
+        boolean servedStarted = server.start(conn);
+
 
         //Menu
         int active = 1;
 
         while (active == 1){
 
-            System.out.println("Welcome to this Program!");
+            
             System.out.println("Please select a number to choose from the menu below");
-            System.out.println ("1) Body Mass Index");
-            System.out.println ("2) Retirement");
+            System.out.println ("1) Body Mass Index - Database");
+            System.out.println ("2) Retirement - Database");
             System.out.println ("3) Shortest Distance");
             System.out.println ("4) Email Address");
             System.out.println ("5) Exit");
@@ -34,6 +64,21 @@ public class Run {
 		}
 
                 if(selection.equals ("1")){
+                    System.out.println("These are the previous entries for this program:");
+				    try{
+					rs = s.executeQuery("SELECT * FROM BMI");
+					while (rs.next()) {
+						System.out.println("TimeStamp: " + rs.getString("createdAt") + ", Feet: " + rs.getInt("height_feet")
+						+ ", Inches: " + rs.getDouble("height_inches") + ", Weight: " + rs.getDouble("weight")
+						+ ", Bmi: " + rs.getDouble("BMI_Rounded") + ", Result: " + rs.getString("result"));
+					}
+				}
+				catch(SQLException e){
+					e.printStackTrace();
+					System.out.println("Could not connect to BMI table in the database.");
+				}
+
+
                     System.out.println ("Enter your height in feet");
                     int feet = input.nextInt();
                     while (feet<0){
@@ -53,14 +98,30 @@ public class Run {
                         System.out.println("#ERROR Invalid input. Please input again");
 				        weight = input.nextDouble();
                     }
-                    
-                    String BMI = test.computeBMI(feet, inches, weight);
-                    
+                    try{
+                    String BMI = test.BMIDB(feet, inches, weight, conn);
                     System.out.println (BMI);
                     }
+                    catch(SQLException e){
+                        e.printStackTrace();
+                        System.out.println("There was an SQLException\n");
+                    }
+                }
                     
                 if(selection.equals ("2")){
-
+                    System.out.println("These are the previous entries for this program:");
+				    try{
+					    rs = statement.executeQuery("SELECT * FROM Retire");
+					while (rs.next()) {
+						System.out.println("TimeStamp: " + rs.getString("createdAt") + ", Age: " + rs.getDouble("age")
+						+ ", salary: " + rs.getDouble("salary") + ", Percentage: " + rs.getDouble("percentage")
+						+ ", Savings Goal: " + rs.getDouble("savings_goal") + ", Retirement Age: " + rs.getDouble("retirement_age") + ", Result: " + rs.getString("result"));
+					}
+				}
+				catch(SQLException e){
+					e.printStackTrace();
+					System.out.println("Could not connect to Retire table in the database.");
+				}
                     System.out.println("Enter your current age");
                     double age = input.nextDouble();
                     while (age<0){
@@ -88,10 +149,15 @@ public class Run {
 				        goal = input.nextDouble();
                     }
                     
-                    
-                   String retirement = test.calculateRetirement(age, salary, percentage, goal);
+                try{
+                   String retirement = test.RetireDB(age, salary, percentage, goal, conn);
                    System.out.println(retirement);
                 }
+                catch(SQLException e){
+                    e.printStackTrace();
+                    System.out.println("There was an SQLException\n");
+                }
+            }
 
                 if(selection.equals ("3")){
                     System.out.println("Enter the value of X1");
@@ -122,6 +188,8 @@ public class Run {
                     		System.out.println("This is not a valid email");
                 }
                 if(selection.equals ("5")) {
+                    server.close();
+                    in.close();
                 	System.exit(0);
                 }
         }
