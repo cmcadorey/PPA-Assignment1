@@ -64,7 +64,7 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="test_DistanceWithAllNegatives" classname="test.distanceTest" time="0.012"/>
-  <testcase name="test_DistanceWithWholeNumbers" classname="test.distanceTest" time="0.001"/>
+  <testcase name="test_DistanceWithAllNegatives" classname="test.distanceTest" time="0.005"/>
+  <testcase name="test_DistanceWithWholeNumbers" classname="test.distanceTest" time="0.007"/>
   <testcase name="test_DistanceWithDecimals" classname="test.distanceTest" time="0"/>
 </testsuite>

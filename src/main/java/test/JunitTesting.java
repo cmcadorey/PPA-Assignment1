@@ -166,12 +166,12 @@ public class JunitTesting {
             Statement s = con.createStatement();
 
             String result = null;
-            percentage = percentage / 100;
+            double div_percentage = percentage /100;
             double employer_percentage = 0.35;
             double death = 100;
             double retirement = 0;
             double years = 0;
-            double AMT_SAVED = salary * percentage;
+            double AMT_SAVED = salary * div_percentage;
 
             while (retirement < savings_goal) {
                 retirement = retirement + AMT_SAVED + (AMT_SAVED * (employer_percentage));

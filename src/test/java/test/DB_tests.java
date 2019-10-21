@@ -46,7 +46,7 @@ public class DB_tests  {
     int height_feet = 5;
     double height_inches = 3;
     double weight = 125.0;
-    double BMI_Rounded =0.0;
+    double BMI_Rounded =22.7;
     String answer = f.BMIDB(height_feet,height_inches,weight,c);
     assertEquals( answer,
         "Your BMI is: 22.7 You are normal weight");
@@ -59,7 +59,7 @@ public class DB_tests  {
     int height_feet = 5;
     double height_inches = 5;
     double weight = 150.0;
-    double BMI_Rounded =0.0;
+    double BMI_Rounded =25.6;
     String answer = f.BMIDB(height_feet,height_inches,weight,c);
     assertEquals( answer,
         "Your BMI is: 25.6 You are overweight");
@@ -90,11 +90,11 @@ public class DB_tests  {
     double salary = 10.0;
     double percentage = 10.0;
     double savings_goal = 1.35;
-    double retirement_age =0.0;
+    double retirement_age =79.0;
     String answer = f.RetireDB(age, salary, percentage, savings_goal,c);
     assertEquals( answer,
     "You will retire at age: 79.0");
-    String shouldHaveHappened = "Insert into Retire (age, salary, percentage, savings_goal,retirement_age) values(" + age + "," + salary + "," + percentage + "," + savings_goal + ",'" + retirement_age + "')";
+    String shouldHaveHappened = "Insert into Retire (age,salary,percentage,savings_goal,retirement_age) values(" + age + "," + salary + "," + percentage + "," + savings_goal + ",'" + retirement_age + ")";
     verify(s).executeUpdate(shouldHaveHappened);
   }
   @Test
@@ -103,11 +103,11 @@ public class DB_tests  {
     double salary = 10.0;
     double percentage = 10.0;
     double savings_goal = 1.35;
-    double retirement_age =0.0;
+    double retirement_age = 106.0;
     String answer = f.RetireDB(age, salary, percentage, savings_goal,c);
     assertEquals( answer,
     "Your age is over the death age.");
-    String shouldHaveHappened = "Insert into Retire (age, salary, percentage, savings_goal,retirement_age) values(" + age + "," + salary + "," + percentage + "," + savings_goal + ",'" + retirement_age + "')";
+    String shouldHaveHappened = "Insert into Retire (age,salary,percentage,savings_goal,retirement_age) values(" + age + "," + salary + "," + percentage + "," + savings_goal + ",'" + retirement_age + ")";
     verify(s).executeUpdate(shouldHaveHappened);
   }
 
